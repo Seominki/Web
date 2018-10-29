@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Gallery</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="./js/jquery-3.1.1.min.js"></script>
+    </head>
+    <body>
+       <input type="hidden" id="curNum" value="0"/>
+        <div class="wrapper">
+           <div class="wrapper_div">
+                <header class="header"> <!--헤더-->
+                    <div id="title">반 고흐 작품 전시관</div> <!--홈페이지 제목-->
+                    <div class="m_menu" onclick="viewMenu()">▼</div> <!--모바일 전용 메뉴-->
+                </header>
+                <div class="top_menu"> <!--모바일 전용 메뉴 리스트-->
+                    <div onclick="menu(this,0)">반 고흐</div> <!--해당 메뉴 클릭시 화면 전환-->
+                    <div onclick="menu(this,1)">해바라기</div>
+                    <div onclick="menu(this,2)">별이 빛나는 밤에</div>
+                    <div onclick="menu(this,3)">아를의 침실</div>
+                    <div onclick="menu(this,4)">까마귀가 나는 밀밭</div>
+                </div>
+                <nav class="sideNav"><!--웹사이트 사이드 메뉴-->
+                    <ul class="sideNavUl"><!--웹사이트 사이드 메뉴 리스트-->
+                        <li class="on" onclick="menu(this,0)"><span>반 고흐</span></li> <!--해당 메뉴 클릭시 화면 전환-->
+                        <li onclick="menu(this,1)"><span>해바라기</span></li>
+                        <li onclick="menu(this,2)"><span>별이 빛나는 밤에</span></li>
+                        <li onclick="menu(this,3)"><span>아를의 침실</span></li>
+                        <li onclick="menu(this,4)"><span>까마귀가 나는 밀밭</span></li>
+                    </ul>
+                </nav>
+                <section> <!--해당 메뉴 클릭시 보이는 화면 정의-->
+                    <article id="art0" style="display: block;">
+                        <div class="article_div">
+                            <div class="article_div_img" style="margin: 0 auto; padding: 0 auto">
+                                <img src="./img/self.jpg" alt="Vincent Willem van Gogh" title="Vincent Willem van Gogh" width="475px" height="475px;">
+                            </div>
+                            <div class="article_div_info">
+                                <div>
+                                    <h3 style="text-align: center">빈센트 빌럼 반 고흐<br>(Vincent Willem van Gogh)</h3>
+                                    <p style="text-align: center">1853/03/30~1890/07/29<br>
+                                    후기인상주의 화가
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article id="art1">
+                        <div class="article_div">
+                            <div class="article_div_img" style="margin: 0 auto; padding: 0 auto">
+                                <img src="./img/art01.jpg" alt="Vincent Willem van Gogh" title="Vincent Willem van Gogh" width="100%" height="475px;">
+                            </div>
+                            <div class="article_div_info">
+                                <div>
+                                    <h3 style="text-align: center">해바라기<br>(Sunflowers,January 1889)</h3>
+                                    <p><br><br></p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article id="art2">
+                        <div class="article_div">
+                            <div class="article_div_img" style="margin: 0 auto; padding: 0 auto">
+                                <img src="./img/art02.jpg" alt="Vincent Willem van Gogh" title="Vincent Willem van Gogh" width="100%" height="475px;">
+                            </div>
+                            <div class="article_div_info">
+                                <div>
+                                    <h3 style="text-align: center">별이 빛나는 밤에<br>(The Starry Night,June 1889)</h3>
+                                    <p><br><br></p>
+                                </div>
+                            </div>
+                        </div>
+                    </article> 
+                    <article id="art3">
+                        <div class="article_div">
+                            <div class="article_div_img" style="margin: 0 auto; padding: 0 auto">
+                                <img src="./img/art03.jpg" alt="Vincent Willem van Gogh" title="Vincent Willem van Gogh" width="100%" height="475px;">
+                            </div>
+                            <div class="article_div_info">
+                                <div>
+                                    <h3 style="text-align: center">아를의 침실<br>(The Bedroom,October 1888)</h3>
+                                    <p><br><br></p>
+                                </div>
+                            </div>
+                        </div>
+                    </article> 
+                    <article id="art4">
+                        <div class="article_div">
+                            <div class="article_div_img" style="margin: 0 auto; padding: 0 auto">
+                                <img src="./img/art04.jpg" alt="Vincent Willem van Gogh" title="Vincent Willem van Gogh" width="100%" height="475px;">
+                            </div>
+                            <div class="article_div_info">
+                                <div>
+                                    <h3 style="text-align: center">까마귀가 나는 밀밭<br>(Wheatfield with Crows,July 1890)</h3>
+                                    <p><br><br></p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>                     
+                </section>
+            </div>
+        </div>
+    </body>
+    <script>
+        $(function(){
+            //스크롤시 메뉴 변경 jquery
+            $("body").on('mousewheel DOMMouseScroll', function(e) {
+                if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+                    setTimeout(function() {
+                        //스크롤 업
+                        upMenu();
+                    }, 500);
+                }else{
+                    setTimeout(function() {
+                        //스크롤 다운
+                        downMenu();
+                    }, 500);
+                    
+                };
+            });
+        });
+        //메뉴 클릭시 화면 이동 jquery
+        function menu(obj,num){
+            $('.sideNavUl>li').removeClass('on');
+            $(obj).addClass('on');
+            $('article').css('display','none');
+            $('#art'+num).css('display','block');
+            $('#curNum').val(num);
+        }
+        //스크롤 업시 메뉴 변경 jquery
+        function upMenu(){
+            var num = "";
+            if("0" == $('#curNum').val()){
+                num = 4;
+            }else if("1" == $('#curNum').val()){
+                num = 0;
+            }else if("2" == $('#curNum').val()){
+                num = 1;
+            }else if("3" == $('#curNum').val()){
+                num = 2;
+            }else if("4" == $('#curNum').val()){
+                num = 3;
+            }
+            $('.sideNavUl>li').removeClass('on');
+            $('article').css('display','none');
+            $('.sideNavUl').children(":eq("+num+")").addClass('on');
+            $('#art'+num).css('display','block');
+            $('#curNum').val(num); 
+        }
+        //스크롤 다운시 메뉴 변경 jquery
+        function downMenu(){
+            var num = "";
+            if("0" == $('#curNum').val()){
+                num = 1;
+            }else if("1" == $('#curNum').val()){
+                num = 2;
+            }else if("2" == $('#curNum').val()){
+                num = 3;
+            }else if("3" == $('#curNum').val()){
+                num = 4;
+            }else if("4" == $('#curNum').val()){
+                num = 0;
+            }
+            $('.sideNavUl>li').removeClass('on');
+            $('article').css('display','none');
+            $('#art'+num).css('display','block');
+            $('.sideNavUl').children(":eq("+num+")").addClass('on');
+            $('#curNum').val(num);
+        }
+        //모바일 전용 메뉴 jquery
+        function viewMenu(){
+            if("none" == $('.top_menu').css('display')){
+                $('.top_menu').css('display','block');   
+            }else{
+                $('.top_menu').css('display','none');
+            }
+            
+        }
+    </script>
+</html>
